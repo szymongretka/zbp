@@ -15,6 +15,7 @@ template<typename Key>
 class TreeTraversal {
 public:
     Node<Key>* getNext(Node<Key> *ptr);
+    Node<Key>* getPrevious(Node<Key> *ptr);
 
 };
 

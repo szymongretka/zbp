@@ -42,12 +42,20 @@ int main() {
     splaySet.printTree();
 
 ////==============================SPLAY TREE DELETE TEST===================================
+
 //    splaySet.deleteNode(22);
 //    std::cout << std::endl << std::endl <<"AFTER DELETING 22:"<< std::endl << std::endl;
 //    printTree(splayTree1);
 
     std::cout << "ITERATOR!!!"  << std::endl;
     for (auto it = splaySet.begin(); it != splaySet.end(); ++it) {
+        cout << ' ' << it->data;
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "ITERATOR BACKWARDS!!!"  << std::endl;
+    for (auto it = splaySet.end(); it != splaySet.begin(); --it) {
         cout << ' ' << it->data;
     }
 

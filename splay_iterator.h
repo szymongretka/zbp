@@ -31,6 +31,11 @@ public:
     }
     splay_iterator operator++(int) { splay_iterator tmp = *this; ++(*this); return tmp; }
 
+    splay_iterator& operator--() {
+        this->m_ptr = treeMove.getPrevious(this->m_ptr);
+        return *this;
+    }
+
     reference operator*() const { return *m_ptr; }
     pointer operator->() const { return m_ptr; }
 

@@ -24,3 +24,54 @@ Node<Key> *TreeTraversal<Key>::getNext(Node<Key> *m_ptr) {
     }
     return m_ptr;
 }
+
+template<typename Key>
+Node<Key> *TreeTraversal<Key>::getPrevious(Node<Key> *ptr) {
+//    if(!ptr->parent) { //root
+//        return ptr->left;
+//    }
+//    if (!ptr->left && !ptr->right) {
+//        return ptr->parent;
+//    }
+//    if(ptr->parent->left && ptr->parent->right) { //parent have both childs -left & right
+//        Node<Key> *temp = ptr->left;
+//        while (temp->right) {
+//            temp = temp->right;
+//        }
+//        return temp;
+//    }
+//    else { //parent have exact 1 child
+//        if(ptr == ptr->parent->left) { //if left child
+//            return ptr->parent;
+//        } else { //right child
+//            Node<Key> *temp = ptr->left;
+//            while (temp->right) {
+//                temp = temp->right;
+//            }
+//            return temp;
+//        }
+//    }
+
+
+
+    if (!ptr->left && !ptr->right) {
+        return ptr->parent;
+    }
+    if (ptr->left) {
+        Node<Key> *temp = ptr->left;
+        while (temp->right) {
+            temp = temp->right;
+        }
+        return temp;
+    } else {
+        Node<Key> *temp = ptr->parent;
+        if(temp->right == ptr) {
+            return temp;
+        }
+        while (temp != temp->parent->right) {
+            temp = temp->parent;
+        }
+        return temp->parent;
+    }
+
+}
