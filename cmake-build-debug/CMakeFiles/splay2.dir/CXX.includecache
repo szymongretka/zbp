@@ -41,10 +41,18 @@ SplayTree.h
 /home/szymek/CLionProjects/splay2/main.cpp
 iostream
 -
+set
+-
+vector
+-
+string
+-
+fstream
+-
+chrono
+-
 SplayTree.cpp
 /home/szymek/CLionProjects/splay2/SplayTree.cpp
-SplaySet.h
-/home/szymek/CLionProjects/splay2/SplaySet.h
 SplaySet.cpp
 /home/szymek/CLionProjects/splay2/SplaySet.cpp
 

@@ -36,6 +36,10 @@ public:
         return *this;
     }
 
+    pointer getData() {
+        return m_ptr;
+    }
+
     reference operator*() const { return *m_ptr; }
     pointer operator->() const { return m_ptr; }
 

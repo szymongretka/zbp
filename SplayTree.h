@@ -14,19 +14,20 @@ using namespace std;
 // data structure that represents a node in the tree
 template<typename Key>
 struct Node {
-    Key data; // holds the key
+    Key data; // holds the key //TODO key jako pair <key, value> ?
     Node *parent; // pointer to the parent
     Node *left; // pointer to left child
     Node *right; // pointer to right child
 };
 
-typedef Node<int> *NodePtr;
+typedef Node<string> *NodePtr;
 
 // class SplayTree implements the operations in Splay tree
 template<typename Key, typename Alloc = allocator<Node<Key>>>
 class SplayTree {
 public:
     SplayTree();
+
     // Pre-Order traversal
     // Node->Left Subtree->Right Subtree
     void preorder();
@@ -54,10 +55,14 @@ public:
     void deleteNode(Key data);
     // print the tree structure on the screen
     void prettyPrint();
+    int getSize();
+    size_t getMaxSize();
+    void clear(Node<string> *ptr);
 private:
     NodePtr mRoot;
     Alloc alloc;
     NodePtr *nodePtr;
+    int size = 0;
     //called by pre order function, prints contents of nodes with pre order traversal
     void preOrderHelper(NodePtr node);
     //called by in order function, prints contents of nodes with in order traversal

@@ -133,6 +133,7 @@ void SplayTree<Key, Alloc>::insert(Key key) {
 
     // splay the node
     splay(node);
+    size++;
 }
 
 template<typename Key, typename Alloc>
@@ -224,8 +225,12 @@ void SplayTree<Key, Alloc>::deleteNodeHelper(NodePtr node, Key key) {
     }
     //s->left is left subtree, t is right subtree
     mRoot = join(s->left, t);
-    alloc.deallocate(s, key);
+
+    alloc.destroy(s);
+    alloc.deallocate(s, 1);
+
     s = nullptr;
+    size--;
 }
 
 //prints a diagram of the splay tree
@@ -352,3 +357,23 @@ void SplayTree<Key, Alloc>::split(NodePtr &x, NodePtr &s, NodePtr &t) {
     s->right = nullptr;
     x = nullptr;
 }
+
+template<typename Key, typename Alloc>
+int SplayTree<Key, Alloc>::getSize() {
+    return this->size;
+}
+
+template<typename Key, typename Alloc>
+size_t SplayTree<Key, Alloc>::getMaxSize() {
+    return alloc.max_size();
+}
+
+template<typename Key, typename Alloc>
+void SplayTree<Key, Alloc>::clear(Node<string> *ptr) {
+    alloc.destroy(ptr);
+    alloc.deallocate(ptr, 1);
+
+    ptr = nullptr;
+    size--;
+}
+

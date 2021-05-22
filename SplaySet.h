@@ -26,9 +26,15 @@ public:
     typedef splay_iterator<Key, Compare, Alloc> iterator;
 //    typedef splay_const_iterator<Key, Alloc> const_iterator;
 
-    Key testInsert(Key key);
-    Key testSearch(Key key);
-    void preOrder();
+    Key insert(Key key);
+    void erase(Key key);
+    int size();
+    bool empty();
+    size_t max_size();
+    void clear();
+//    Key find(Key key);
+
+
     int getKey();
     void printTree();
 
@@ -38,12 +44,12 @@ public:
 
     iterator begin() { return splay_iterator<Key, less<Key>, Alloc>(splayTree.minimum(splayTree.getRoot())); }
     iterator end() { return splay_iterator<Key, less<Key>, Alloc>(splayTree.maximum(splayTree.getRoot())); }
+    iterator find(Key key) { return splay_iterator<Key, less<Key>, Alloc>(splayTree.searchTree(key)); }
 
 
 private:
     SplayTree<Key> splayTree;
     Node<Key> *n{};
-
 };
 
 
