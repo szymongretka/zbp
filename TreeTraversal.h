@@ -11,11 +11,11 @@
 using namespace std;
 
 
-template<typename Key>
+template<typename Key, typename Value>
 class TreeTraversal {
 public:
-    Node<Key>* getNext(Node<Key> *ptr);
-    Node<Key>* getPrevious(Node<Key> *ptr);
+    Node<Key, Value>* getNext(Node<Key, Value> *ptr);
+    Node<Key, Value>* getPrevious(Node<Key, Value> *ptr);
 
 };
 

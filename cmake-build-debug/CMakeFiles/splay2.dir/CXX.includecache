@@ -69,6 +69,8 @@ chrono
 -
 SplayTree.cpp
 /home/szymek/CLionProjects/splay2/SplayTree.cpp
+SplayMap.cpp
+/home/szymek/CLionProjects/splay2/SplayMap.cpp
 SplaySet.cpp
 /home/szymek/CLionProjects/splay2/SplaySet.cpp
 

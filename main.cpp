@@ -7,23 +7,50 @@
 #include <chrono>
 #include "SplayTree.cpp"
 //#include "SplaySet.h"
+#include "SplayMap.cpp"
+
 #include "SplaySet.cpp"
 
 using namespace std;
 
-void DisplayDeleteInNormalSetDuration(const string& key, set<string> english_dictionary_set) {
+void DisplayMapFindDuration(const string& key, map<string, string> m) {
+    auto findStartClock = chrono::high_resolution_clock::now();
+
+    m.find(key);
+
+    auto findEndClock = chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double> time_span3 = std::chrono::duration_cast<std::chrono::duration<double>>(findEndClock - findStartClock);
+
+    cout << "duration for finding in normal map: " << time_span3.count() << endl;
+}
+
+void DisplayMapInsertDuration(const vector<string>& english_dictionary_vec, map<string, string> m) {
+    auto insertStartClock = chrono::high_resolution_clock::now();
+
+    for (const string& i : english_dictionary_vec) {
+        m.insert(pair<string,string>(i, i));
+    }
+
+    auto insertEndClock = chrono::high_resolution_clock::now();
+    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(insertEndClock - insertStartClock);
+    cout << "duration for inserting into normal map: " << time_span.count() << endl;
+}
+
+
+void DisplayDeleteInNormalSetDuration(const string& key, set<string> set) {
     auto start = chrono::high_resolution_clock::now();
-    english_dictionary_set.erase(key);
+    set.erase(key);
     auto end = chrono::high_resolution_clock::now();
     std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
     cout << "duration for deleting in normal set: " << time_span.count() << endl;
 }
 
-void DisplaySetInsertDuration(const vector<string>& english_dictionary_vec, set<string> english_dictionary_set) {
+void DisplaySetInsertDuration(const vector<string>& english_dictionary_vec, set<string> set) {
     auto insertStartClock = chrono::high_resolution_clock::now();
 
     for (const string& i : english_dictionary_vec) {
-        english_dictionary_set.insert(i);
+        set.insert(i);
     }
 
     auto insertEndClock = chrono::high_resolution_clock::now();
@@ -31,10 +58,12 @@ void DisplaySetInsertDuration(const vector<string>& english_dictionary_vec, set<
     cout << "duration for inserting into normal set: " << time_span.count() << endl;
 }
 
-void DisplaySetFindDuration(const string& key, set<string> english_dictionary_set) {
+
+
+void DisplaySetFindDuration(const string& key, set<string> set) {
     auto findStartClock = chrono::high_resolution_clock::now();
 
-    english_dictionary_set.find(key);
+    set.find(key);
 
     auto findEndClock = chrono::high_resolution_clock::now();
 
@@ -43,10 +72,10 @@ void DisplaySetFindDuration(const string& key, set<string> english_dictionary_se
     cout << "duration for finding in normal set: " << time_span3.count() << endl;
 }
 
-void DisplaySetClearDuration(set<string> english_dictionary_set) {
+void DisplaySetClearDuration(set<string> set) {
     auto start = chrono::high_resolution_clock::now();
 
-    english_dictionary_set.clear();
+    set.clear();
 
     auto end = chrono::high_resolution_clock::now();
 
@@ -59,7 +88,7 @@ int main() {
 ////==============================CREATING INITIAL TREE=======================================
 
 
-    set<string> english_dictionary_set;
+    set<string> set;
     vector<string> english_dictionary_vec;
     SplaySet<string> splaySet;
 
@@ -71,7 +100,7 @@ int main() {
     }
     file.close();
 
-    DisplaySetInsertDuration(english_dictionary_vec, english_dictionary_set);
+    DisplaySetInsertDuration(english_dictionary_vec, set);
 
     ////Insert into Splay set
     auto insertStartClock2 = chrono::high_resolution_clock::now();
@@ -90,7 +119,7 @@ int main() {
     cout << "duration for inserting into splay set 2: " << insert_time_span.count() << endl;
 
     //// Find in normal set
-    DisplaySetFindDuration("incipience\r", english_dictionary_set);
+    DisplaySetFindDuration("incipience\r", set);
 
     //// Find in Splay set
     auto findStartClock = chrono::high_resolution_clock::now();
@@ -108,7 +137,7 @@ int main() {
     cout << "duration for finding in splay set 2: " << time_span4.count() << endl;
 
     ////Delete in normal set
-    DisplayDeleteInNormalSetDuration("incipiency\r", english_dictionary_set);
+    DisplayDeleteInNormalSetDuration("incipiency\r", set);
 
     cout << "size before deletion: " << splaySet.size() << endl;
 
@@ -125,7 +154,7 @@ int main() {
 
     cout << "max size for splay set: " << splaySet.max_size() << endl;
 
-    DisplaySetClearDuration(english_dictionary_set);
+    DisplaySetClearDuration(set);
 
     ////Clear splay set
     auto clearStartClock = chrono::high_resolution_clock::now();
@@ -143,11 +172,30 @@ int main() {
 
     cout << "is aaab less than aaa: " << comp_func("aaab", "aaa") << endl;
 
+    ////MAP
+    cout << "========== MAP ============" << endl;
 
-    map<string, int> map;
-    map.insert(pair<string , int>("test", 1));
+    map<string, string> map;
 
+    SplayMap<string, string> splayMap;
 
+    DisplayMapInsertDuration(english_dictionary_vec, map);
+
+    DisplayMapFindDuration("incipience\r", map);
+
+    ////Insert into Splay map
+    auto insertMapStart = chrono::high_resolution_clock::now();
+    for (const string& i : english_dictionary_vec) {
+        splayMap.insert(pair<string, string>(i, i));
+    }
+    auto insertMapEnd = chrono::high_resolution_clock::now();
+    std::chrono::duration<double> map_time_insert_span = std::chrono::duration_cast<std::chrono::duration<double>>(insertMapEnd - insertMapStart);
+    cout << "duration for inserting into splay map: " << map_time_insert_span.count() << endl;
+
+    return 0;
+}
+
+// TODO: eplace
 
 
 //    splaySet.insert(3);
@@ -192,12 +240,3 @@ int main() {
 //    for (auto it = splaySet.end(); it != splaySet.begin(); --it) {
 //        cout << ' ' << it->data;
 //    }
-
-
-
-
-    return 0;
-}
-
-// TODO: eplace, rbegin, rend, value_comp
-// TODO MAPA

@@ -7,7 +7,7 @@
 
 #include "TreeTraversal.cpp"
 
-template <typename K, typename C, typename A>
+template <typename K, typename Value, typename C, typename A>
 class splay_iterator {
 public:
     typedef typename A::difference_type difference_type;
@@ -48,16 +48,16 @@ public:
 
 private:
     pointer m_ptr;
-    TreeTraversal<K> treeMove;
+    TreeTraversal<K, Value> treeMove;
 };
 
-template<typename K, typename C, typename A>
-splay_iterator<K, C, A>::splay_iterator(const splay_iterator &) {
+template<typename K, typename Value, typename C, typename A>
+splay_iterator<K, Value, C, A>::splay_iterator(const splay_iterator &) {
 
 }
 
-template<typename K, typename C, typename A>
-splay_iterator<K, C, A>::~splay_iterator() = default;
+template<typename K, typename Value, typename C, typename A>
+splay_iterator<K, Value, C, A>::~splay_iterator() = default;
 
 
 

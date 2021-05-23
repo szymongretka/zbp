@@ -1,12 +1,9 @@
-//
-// Created by szymek on 19.05.2021.
-//
 
 #include "SplaySet.h"
 
 template<typename Key, typename Compare, typename Alloc>
-Key SplaySet<Key, Compare, Alloc>::insert(Key key) {
-    splayTree.insert(key);
+void SplaySet<Key, Compare, Alloc>::insert(Key key) {
+    splayTree.insert(key, key);
 }
 
 //template<typename Key, typename Compare, typename Alloc>

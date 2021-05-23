@@ -13,11 +13,11 @@
 using namespace std;
 
 template<typename Key, typename Compare = less<Key>,
-        typename Alloc = allocator<Node<Key>> >
+        typename Alloc = allocator<Node<Key, Key>> >
 class SplaySet {
 private:
-    SplayTree<Key> splayTree;
-    Node<Key> *n{};
+    SplayTree<Key, Key> splayTree;
+    Node<Key, Key> *n{};
     Compare compare;
 public:
     typedef Alloc allocator_type;
@@ -27,10 +27,10 @@ public:
     typedef typename Alloc::difference_type difference_type;
     typedef typename Alloc::size_type size_type;
 
-    typedef splay_iterator<Key, Compare, Alloc> iterator;
+    typedef splay_iterator<Key, Key, Compare, Alloc> iterator;
 //    typedef splay_const_iterator<Key, Alloc> const_iterator;
 
-    Key insert(Key key);
+    void insert(Key key);
     void erase(Key key);
     int size();
     bool empty();
@@ -47,9 +47,9 @@ public:
     SplaySet(const SplaySet&);
     ~SplaySet();
 
-    iterator begin() { return splay_iterator<Key, less<Key>, Alloc>(splayTree.minimum(splayTree.getRoot())); }
-    iterator end() { return splay_iterator<Key, less<Key>, Alloc>(splayTree.maximum(splayTree.getRoot())); }
-    iterator find(Key key) { return splay_iterator<Key, less<Key>, Alloc>(splayTree.searchTree(key)); }
+    iterator begin() { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.minimum(splayTree.getRoot())); }
+    iterator end() { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.maximum(splayTree.getRoot())); }
+    iterator find(Key key) { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.searchTree(key)); }
 
 };
 

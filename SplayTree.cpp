@@ -4,36 +4,36 @@
 
 #include "SplayTree.h"
 
-template<typename Key, typename Alloc>
-SplayTree<Key, Alloc>::SplayTree() {
+template<typename Key, typename Value, typename Alloc>
+SplayTree<Key, Value, Alloc>::SplayTree() {
     mRoot = nullptr;
 }
 
 // Pre-Order traversal
 // Node->Left Subtree->Right Subtree
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::preorder() {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::preorder() {
     preOrderHelper(this->mRoot);
 }
 
 // In-Order traversal
 // Left Subtree -> Node -> Right Subtree
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::inorder() {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::inorder() {
     inOrderHelper(this->mRoot);
 }
 
 // Post-Order traversal
 // Left Subtree -> Right Subtree -> Node
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::postorder() {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::postorder() {
     postOrderHelper(this->mRoot);
 }
 
 // search the tree for the key k
 // and return the corresponding node
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::searchTree(Key k) {
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::searchTree(Key k) {
     NodePtr x = searchTreeHelper(this->mRoot, k);
     if (x) {
         splay(x);
@@ -42,8 +42,8 @@ NodePtr SplayTree<Key, Alloc>::searchTree(Key k) {
 }
 
 // find the node with the minimum key
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::minimum(NodePtr node) {
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::minimum(NodePtr node) {
     while (node->left != nullptr) {
         node = node->left;
     }
@@ -51,8 +51,8 @@ NodePtr SplayTree<Key, Alloc>::minimum(NodePtr node) {
 }
 
 // find the node with the maximum key
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::maximum(NodePtr node) {
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::maximum(NodePtr node) {
     while (node->right != nullptr) {
         node = node->right;
     }
@@ -60,8 +60,8 @@ NodePtr SplayTree<Key, Alloc>::maximum(NodePtr node) {
 }
 
 // find the successor of a given node
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::successor(NodePtr x) {
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::successor(NodePtr x) {
     // if the right subtree is not null,
     // the successor is the leftmost node in the
     // right subtree
@@ -80,8 +80,8 @@ NodePtr SplayTree<Key, Alloc>::successor(NodePtr x) {
 }
 
 // find the predecessor of a given node
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::predecessor(NodePtr x) {
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::predecessor(NodePtr x) {
     // if the left subtree is not null,
     // the predecessor is the rightmost node in the
     // left subtree
@@ -99,10 +99,10 @@ NodePtr SplayTree<Key, Alloc>::predecessor(NodePtr x) {
 }
 
 // insert the key to the tree in its appropriate position
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::insert(Key key) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::insert(Key key, Value value) {
     // normal BST insert
-    Node<Key>* node = alloc.allocate(1);
+    Node<Key, Value>* node = alloc.allocate(1);
     alloc.construct(node);
 
     node->parent = nullptr;
@@ -136,27 +136,27 @@ void SplayTree<Key, Alloc>::insert(Key key) {
     size++;
 }
 
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::getRoot(){
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::getRoot(){
     return this->mRoot;
 }
 
 // delete the node from the tree
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::deleteNode(Key data) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::deleteNode(Key data) {
     deleteNodeHelper(this->mRoot, data);
 }
 
 // print the tree structure on the screen
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::prettyPrint() {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::prettyPrint() {
     printHelper(this->mRoot, "", true);
 }
 
 
 //called by pre order function, prints contents of nodes with pre order traversal
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::preOrderHelper(NodePtr node) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::preOrderHelper(NodePtr node) {
     if (node != nullptr) {
         cout<<node->data<<" ";
         preOrderHelper(node->left);
@@ -165,8 +165,8 @@ void SplayTree<Key, Alloc>::preOrderHelper(NodePtr node) {
 }
 
 //called by in order function, prints contents of nodes with in order traversal
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::inOrderHelper(NodePtr node) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::inOrderHelper(NodePtr node) {
     if (node != nullptr) {
         inOrderHelper(node->left);
         cout<<node->data<<" ";
@@ -175,8 +175,8 @@ void SplayTree<Key, Alloc>::inOrderHelper(NodePtr node) {
 }
 
 //called by post order function, prints contents of nodes with post order traversal
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::postOrderHelper(NodePtr node) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::postOrderHelper(NodePtr node) {
     if (node != nullptr) {
         postOrderHelper(node->left);
         postOrderHelper(node->right);
@@ -185,8 +185,8 @@ void SplayTree<Key, Alloc>::postOrderHelper(NodePtr node) {
 }
 
 //traverses binary search tree until finds the location of the key
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::searchTreeHelper(NodePtr node, Key key) {
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::searchTreeHelper(NodePtr node, Key key) {
     if (node == nullptr || key == node->data) {
         return node;
     }
@@ -198,8 +198,8 @@ NodePtr SplayTree<Key, Alloc>::searchTreeHelper(NodePtr node, Key key) {
 }
 
 //deletes node and rebalances tree
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::deleteNodeHelper(NodePtr node, Key key) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::deleteNodeHelper(NodePtr node, Key key) {
     NodePtr x = nullptr;
     NodePtr t, s;
     while (node != nullptr){
@@ -234,8 +234,8 @@ void SplayTree<Key, Alloc>::deleteNodeHelper(NodePtr node, Key key) {
 }
 
 //prints a diagram of the splay tree
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::printHelper(NodePtr root, string indent, bool last) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::printHelper(NodePtr root, string indent, bool last) {
     // print the tree structure on the screen
     if (root != nullptr) {
         cout<<indent;
@@ -255,8 +255,8 @@ void SplayTree<Key, Alloc>::printHelper(NodePtr root, string indent, bool last) 
 }
 
 // rotate left at node x
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::leftRotate(NodePtr x) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::leftRotate(NodePtr x) {
     NodePtr y = x->right;
     x->right = y->left;
     if (y->left != nullptr) {
@@ -275,8 +275,8 @@ void SplayTree<Key, Alloc>::leftRotate(NodePtr x) {
 }
 
 // rotate right at node x
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::rightRotate(NodePtr x) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::rightRotate(NodePtr x) {
     NodePtr y = x->left;
     x->left = y->right;
     if (y->right != nullptr) {
@@ -295,8 +295,8 @@ void SplayTree<Key, Alloc>::rightRotate(NodePtr x) {
 }
 
 // splaying
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::splay(NodePtr x) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::splay(NodePtr x) {
     while (x->parent) {
         if (!x->parent->parent) {
             if (x == x->parent->left) {
@@ -327,8 +327,8 @@ void SplayTree<Key, Alloc>::splay(NodePtr x) {
 }
 
 // joins two trees s and t
-template<typename Key, typename Alloc>
-NodePtr SplayTree<Key, Alloc>::join(NodePtr s, NodePtr t){
+template<typename Key, typename Value, typename Alloc>
+NodePtr SplayTree<Key, Value, Alloc>::join(NodePtr s, NodePtr t){
     if (!s) {
         return t;
     }
@@ -345,8 +345,8 @@ NodePtr SplayTree<Key, Alloc>::join(NodePtr s, NodePtr t){
 }
 
 // splits the tree into s (root with left subtree) and t (right subtree)
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::split(NodePtr &x, NodePtr &s, NodePtr &t) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::split(NodePtr &x, NodePtr &s, NodePtr &t) {
     if (x->right) {
         t = x->right;
         t->parent = nullptr;
@@ -358,18 +358,18 @@ void SplayTree<Key, Alloc>::split(NodePtr &x, NodePtr &s, NodePtr &t) {
     x = nullptr;
 }
 
-template<typename Key, typename Alloc>
-int SplayTree<Key, Alloc>::getSize() {
+template<typename Key, typename Value, typename Alloc>
+int SplayTree<Key, Value, Alloc>::getSize() {
     return this->size;
 }
 
-template<typename Key, typename Alloc>
-size_t SplayTree<Key, Alloc>::getMaxSize() {
+template<typename Key, typename Value, typename Alloc>
+size_t SplayTree<Key, Value, Alloc>::getMaxSize() {
     return alloc.max_size();
 }
 
-template<typename Key, typename Alloc>
-void SplayTree<Key, Alloc>::clear(Node<string> *ptr) {
+template<typename Key, typename Value, typename Alloc>
+void SplayTree<Key, Value, Alloc>::clear(Node<Key, Value> *ptr) {
     alloc.destroy(ptr);
     alloc.deallocate(ptr, 1);
 

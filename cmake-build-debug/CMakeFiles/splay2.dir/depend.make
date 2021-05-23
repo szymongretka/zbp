@@ -22,6 +22,8 @@ CMakeFiles/splay2.dir/TreeTraversal.cpp.o: ../SplayTree.h
 CMakeFiles/splay2.dir/TreeTraversal.cpp.o: ../TreeTraversal.cpp
 CMakeFiles/splay2.dir/TreeTraversal.cpp.o: ../TreeTraversal.h
 
+CMakeFiles/splay2.dir/main.cpp.o: ../SplayMap.cpp
+CMakeFiles/splay2.dir/main.cpp.o: ../SplayMap.h
 CMakeFiles/splay2.dir/main.cpp.o: ../SplaySet.cpp
 CMakeFiles/splay2.dir/main.cpp.o: ../SplaySet.h
 CMakeFiles/splay2.dir/main.cpp.o: ../SplayTree.cpp

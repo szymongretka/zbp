@@ -12,18 +12,19 @@
 using namespace std;
 
 // data structure that represents a node in the tree
-template<typename Key>
+template<typename Key, typename Value>
 struct Node {
     Key data; // holds the key //TODO key jako pair <key, value> ?
+    Value value;
     Node *parent; // pointer to the parent
     Node *left; // pointer to left child
     Node *right; // pointer to right child
 };
 
-typedef Node<string> *NodePtr;
+typedef Node<string, string> *NodePtr;
 
 // class SplayTree implements the operations in Splay tree
-template<typename Key, typename Alloc = allocator<Node<Key>>>
+template<typename Key, typename Value, typename Alloc = allocator<Node<Key, Value>>>
 class SplayTree {
 public:
     SplayTree();
@@ -49,7 +50,7 @@ public:
     // find the predecessor of a given node
     NodePtr predecessor(NodePtr x);
     // insert the key to the tree in its appropriate position
-    void insert(Key key);
+    void insert(Key key, Value value);
     NodePtr getRoot();
     // delete the node from the tree
     void deleteNode(Key data);
@@ -57,7 +58,7 @@ public:
     void prettyPrint();
     int getSize();
     size_t getMaxSize();
-    void clear(Node<string> *ptr);
+    void clear(Node<Key, Value> *ptr);
 private:
     NodePtr mRoot;
     Alloc alloc;
