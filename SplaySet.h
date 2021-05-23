@@ -15,6 +15,10 @@ using namespace std;
 template<typename Key, typename Compare = less<Key>,
         typename Alloc = allocator<Node<Key>> >
 class SplaySet {
+private:
+    SplayTree<Key> splayTree;
+    Node<Key> *n{};
+    Compare compare;
 public:
     typedef Alloc allocator_type;
     typedef typename Alloc::value_type value_type;
@@ -32,6 +36,7 @@ public:
     bool empty();
     size_t max_size();
     void clear();
+    Compare key_comp() { return compare; }
 //    Key find(Key key);
 
 
@@ -46,10 +51,6 @@ public:
     iterator end() { return splay_iterator<Key, less<Key>, Alloc>(splayTree.maximum(splayTree.getRoot())); }
     iterator find(Key key) { return splay_iterator<Key, less<Key>, Alloc>(splayTree.searchTree(key)); }
 
-
-private:
-    SplayTree<Key> splayTree;
-    Node<Key> *n{};
 };
 
 

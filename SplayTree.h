@@ -61,7 +61,6 @@ public:
 private:
     NodePtr mRoot;
     Alloc alloc;
-    NodePtr *nodePtr;
     int size = 0;
     //called by pre order function, prints contents of nodes with pre order traversal
     void preOrderHelper(NodePtr node);

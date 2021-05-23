@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/home/szymek/CLionProjects/splay2/SplayMap.cpp
+SplayMap.h
+/home/szymek/CLionProjects/splay2/SplayMap.h
+
+/home/szymek/CLionProjects/splay2/SplayMap.h
+memory
+-
+iostream
+-
+SplayTree.h
+/home/szymek/CLionProjects/splay2/SplayTree.h
+splay_iterator.h
+/home/szymek/CLionProjects/splay2/splay_iterator.h
+
 /home/szymek/CLionProjects/splay2/SplaySet.cpp
 SplaySet.h
 /home/szymek/CLionProjects/splay2/SplaySet.h
@@ -42,6 +56,8 @@ SplayTree.h
 iostream
 -
 set
+-
+map
 -
 vector
 -

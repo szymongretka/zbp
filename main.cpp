@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <map>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -138,6 +139,14 @@ int main() {
     cout << "is empty: " << splaySet.empty() << endl;
 
 
+    auto comp_func = splaySet.key_comp();
+
+    cout << "is aaab less than aaa: " << comp_func("aaab", "aaa") << endl;
+
+
+    map<string, int> map;
+    map.insert(pair<string , int>("test", 1));
+
 
 
 
@@ -190,5 +199,5 @@ int main() {
     return 0;
 }
 
-// TODO: eplace, rbegin, rend, key_comp i value_comp
+// TODO: eplace, rbegin, rend, value_comp
 // TODO MAPA

@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/splay2.dir/main.cpp.o CMakeFiles/splay2.dir/SplayTree.cpp.o CMakeFiles/splay2.dir/SplaySet.cpp.o CMakeFiles/splay2.dir/TreeTraversal.cpp.o -o splay2 
+/usr/bin/c++ -g CMakeFiles/splay2.dir/main.cpp.o CMakeFiles/splay2.dir/SplayTree.cpp.o CMakeFiles/splay2.dir/SplaySet.cpp.o CMakeFiles/splay2.dir/TreeTraversal.cpp.o CMakeFiles/splay2.dir/SplayMap.cpp.o -o splay2 

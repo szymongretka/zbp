@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/szymek/CLionProjects/splay2/SplayMap.cpp">
+			<Option target="splay2"/>
+		</Unit>
+		<Unit filename="/home/szymek/CLionProjects/splay2/SplayMap.h">
+			<Option target="splay2"/>
+		</Unit>
 		<Unit filename="/home/szymek/CLionProjects/splay2/SplaySet.cpp">
 			<Option target="splay2"/>
 		</Unit>

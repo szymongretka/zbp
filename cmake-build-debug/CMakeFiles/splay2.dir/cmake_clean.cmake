@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/splay2.dir/SplayMap.cpp.o"
   "CMakeFiles/splay2.dir/SplaySet.cpp.o"
   "CMakeFiles/splay2.dir/SplayTree.cpp.o"
   "CMakeFiles/splay2.dir/TreeTraversal.cpp.o"

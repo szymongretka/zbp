@@ -142,6 +142,33 @@ splay2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/splay2.dir/build.make CMakeFiles/splay2.dir/build
 .PHONY : splay2/fast
 
+SplayMap.o: SplayMap.cpp.o
+
+.PHONY : SplayMap.o
+
+# target to build an object file
+SplayMap.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/splay2.dir/build.make CMakeFiles/splay2.dir/SplayMap.cpp.o
+.PHONY : SplayMap.cpp.o
+
+SplayMap.i: SplayMap.cpp.i
+
+.PHONY : SplayMap.i
+
+# target to preprocess a source file
+SplayMap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/splay2.dir/build.make CMakeFiles/splay2.dir/SplayMap.cpp.i
+.PHONY : SplayMap.cpp.i
+
+SplayMap.s: SplayMap.cpp.s
+
+.PHONY : SplayMap.s
+
+# target to generate assembly for a file
+SplayMap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/splay2.dir/build.make CMakeFiles/splay2.dir/SplayMap.cpp.s
+.PHONY : SplayMap.cpp.s
+
 SplaySet.o: SplaySet.cpp.o
 
 .PHONY : SplaySet.o
@@ -259,6 +286,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... splay2"
+	@echo "... SplayMap.o"
+	@echo "... SplayMap.i"
+	@echo "... SplayMap.s"
 	@echo "... SplaySet.o"
 	@echo "... SplaySet.i"
 	@echo "... SplaySet.s"
