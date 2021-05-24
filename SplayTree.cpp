@@ -109,6 +109,7 @@ void SplayTree<Key, Value, Alloc>::insert(Key key, Value value) {
     node->left = nullptr;
     node->right = nullptr;
     node->data = key;
+    node->value = value;
     NodePtr y = nullptr;
     NodePtr x = this->mRoot;
 
@@ -190,11 +191,19 @@ NodePtr SplayTree<Key, Value, Alloc>::searchTreeHelper(NodePtr node, Key key) {
     if (node == nullptr || key == node->data) {
         return node;
     }
-
-    if (key < node->data) {
-        return searchTreeHelper(node->left, key);
+    NodePtr temp = node;
+    while (temp != nullptr && key != temp->data) {
+        if (key < temp->data) {
+            temp = temp->left;
+        } else {
+            temp = temp->right;
+        }
     }
-    return searchTreeHelper(node->right, key);
+    return temp;
+//    if (key < node->data) {
+//        return searchTreeHelper(node->left, key);
+//    }
+//    return searchTreeHelper(node->right, key);
 }
 
 //deletes node and rebalances tree
