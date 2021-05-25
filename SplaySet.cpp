@@ -6,10 +6,6 @@ void SplaySet<Key, Compare, Alloc>::insert(Key key) {
     splayTree.insert(key, key);
 }
 
-//template<typename Key, typename Compare, typename Alloc>
-//iterator SplaySet<Key, Compare, Alloc>::find(Key key) {
-//    return splay_iterator<Key, less<Key>, Alloc>(splayTree.searchTree(key));
-//}
 
 template<typename Key, typename Compare, typename Alloc>
 int SplaySet<Key, Compare, Alloc>::getKey() {
@@ -60,6 +56,11 @@ void SplaySet<Key, Compare, Alloc>::clear() {
         splayTree.clear(it.getData());
     }
     splayTree.clear(end().getData());
+}
+
+template<typename Key, typename Compare, typename Alloc>
+Key SplaySet<Key, Compare, Alloc>::find(Key key) {
+    return splayTree.searchTree(key)->data;
 }
 
 template<typename Key, typename Compare, typename Alloc>

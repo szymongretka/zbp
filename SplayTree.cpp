@@ -265,74 +265,139 @@ void SplayTree<Key, Value, Alloc>::printHelper(NodePtr root, string indent, bool
 
 // rotate left at node x
 template<typename Key, typename Value, typename Alloc>
-void SplayTree<Key, Value, Alloc>::leftRotate(NodePtr x) {
-    NodePtr y = x->right;
-    x->right = y->left;
-    if (y->left != nullptr) {
-        y->left->parent = x;
+void SplayTree<Key, Value, Alloc>::leftRotate(NodePtr node) {
+    NodePtr rightChild = node->right;
+    NodePtr nodeParent = node->parent;
+    if (nodeParent && nodeParent->left == node) {
+        nodeParent->left = rightChild;
     }
-    y->parent = x->parent;
-    if (x->parent == nullptr) {
-        this->mRoot = y;
-    } else if (x == x->parent->left) {
-        x->parent->left = y;
-    } else {
-        x->parent->right = y;
+    else if(nodeParent) {
+        nodeParent->right = rightChild;
     }
-    y->left = x;
-    x->parent = y;
+    NodePtr tempNode = rightChild->left;
+    if (tempNode) {
+        tempNode->parent = node;
+    }
+    rightChild->parent = nodeParent;
+    rightChild->left = node;
+
+    node->parent = rightChild;
+    node->right = tempNode;
+
+
+//    NodePtr y = x->right;
+//    x->right = y->left;
+//    if (y->left != nullptr) {
+//        y->left->parent = x;
+//    }
+//    y->parent = x->parent;
+//    if (x->parent == nullptr) {
+//        this->mRoot = y;
+//    } else if (x == x->parent->left) {
+//        x->parent->left = y;
+//    } else {
+//        x->parent->right = y;
+//    }
+//    y->left = x;
+//    x->parent = y;
 }
 
 // rotate right at node x
 template<typename Key, typename Value, typename Alloc>
-void SplayTree<Key, Value, Alloc>::rightRotate(NodePtr x) {
-    NodePtr y = x->left;
-    x->left = y->right;
-    if (y->right != nullptr) {
-        y->right->parent = x;
+void SplayTree<Key, Value, Alloc>::rightRotate(NodePtr node) {
+    NodePtr leftChild = node->left;
+    NodePtr nodeParent = node->parent;
+    if (nodeParent && nodeParent->right == node) {
+        nodeParent->right = leftChild;
     }
-    y->parent = x->parent;
-    if (x->parent == nullptr) {
-        this->mRoot = y;
-    } else if (x == x->parent->right) {
-        x->parent->right = y;
-    } else {
-        x->parent->left = y;
+    else if(nodeParent) {
+        nodeParent->left = leftChild;
     }
-    y->right = x;
-    x->parent = y;
+    NodePtr temp = leftChild->right;
+    if (temp) {
+        temp->parent = node;
+    }
+    leftChild->parent = nodeParent;
+    leftChild->right = node;
+
+    node->parent = leftChild;
+    node->left = temp;
+
+//    NodePtr y = x->left;
+//    x->left = y->right;
+//    if (y->right != nullptr) {
+//        y->right->parent = x;
+//    }
+//    y->parent = x->parent;
+//    if (x->parent == nullptr) {
+//        this->mRoot = y;
+//    } else if (x == x->parent->right) {
+//        x->parent->right = y;
+//    } else {
+//        x->parent->left = y;
+//    }
+//    y->right = x;
+//    x->parent = y;
 }
 
 // splaying
 template<typename Key, typename Value, typename Alloc>
-void SplayTree<Key, Value, Alloc>::splay(NodePtr x) {
-    while (x->parent) {
-        if (!x->parent->parent) {
-            if (x == x->parent->left) {
-                // zig rotation
-                rightRotate(x->parent);
+void SplayTree<Key, Value, Alloc>::splay(NodePtr node) {
+    while (node && node->parent) {
+        NodePtr parent = node->parent;
+        if (parent == mRoot) {
+            if (parent->left == node) {
+                rightRotate(parent);
             } else {
-                // zag rotation
-                leftRotate(x->parent);
+                leftRotate(parent);
             }
-        } else if (x == x->parent->left && x->parent == x->parent->parent->left) {
-            // zig-zig rotation
-            rightRotate(x->parent->parent);
-            rightRotate(x->parent);
-        } else if (x == x->parent->right && x->parent == x->parent->parent->right) {
-            // zag-zag rotation
-            leftRotate(x->parent->parent);
-            leftRotate(x->parent);
-        } else if (x == x->parent->right && x->parent == x->parent->parent->left) {
-            // zig-zag rotation
-            leftRotate(x->parent);
-            rightRotate(x->parent);
+            break;
+        }
+        NodePtr grandParent = parent->parent;
+        if (grandParent->left == parent && parent->left == node) {
+            rightRotate(grandParent);
+            rightRotate(parent);
+        } else if (grandParent->left == parent) {
+            leftRotate(parent);
+            rightRotate(grandParent);
+        } else if (parent->left == node) {
+            rightRotate(parent);
+            leftRotate(grandParent);
         } else {
-            // zag-zig rotation
-            rightRotate(x->parent);
-            leftRotate(x->parent);
+            leftRotate(grandParent);
+            leftRotate(parent);
         }
     }
+    mRoot = node;
+
+
+//    while (x->parent) {
+//        if (!x->parent->parent) {
+//            if (x == x->parent->left) {
+//                // zig rotation
+//                rightRotate(x->parent);
+//            } else {
+//                // zag rotation
+//                leftRotate(x->parent);
+//            }
+//        } else if (x == x->parent->left && x->parent == x->parent->parent->left) {
+//            // zig-zig rotation
+//            rightRotate(x->parent->parent);
+//            rightRotate(x->parent);
+//        } else if (x == x->parent->right && x->parent == x->parent->parent->right) {
+//            // zag-zag rotation
+//            leftRotate(x->parent->parent);
+//            leftRotate(x->parent);
+//        } else if (x == x->parent->right && x->parent == x->parent->parent->left) {
+//            // zig-zag rotation
+//            leftRotate(x->parent);
+//            rightRotate(x->parent);
+//        } else {
+//            // zag-zig rotation
+//            rightRotate(x->parent);
+//            leftRotate(x->parent);
+//        }
+//    }
 }
 
 // joins two trees s and t

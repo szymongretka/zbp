@@ -8,7 +8,6 @@
 #include "SplayTree.cpp"
 //#include "SplaySet.h"
 #include "SplayMap.cpp"
-
 #include "SplaySet.cpp"
 
 using namespace std;
@@ -135,7 +134,7 @@ int main() {
 
     //// Find in Splay set
     auto findStartClock = chrono::high_resolution_clock::now();
-    splaySet.find("incipience\r");
+    splaySet.find("sunshines\r");
     auto findEndClock = chrono::high_resolution_clock::now();
     chrono::duration<double> time_span3 = chrono::duration_cast<chrono::duration<double>>(findEndClock - findStartClock);
     cout << "duration for finding in splay set: " << time_span3.count() << endl;
@@ -143,10 +142,18 @@ int main() {
 
     //// Find in Splay set 2
     auto findStartClock2 = chrono::high_resolution_clock::now();
-    auto data = splaySet.find("incipience\r");
+    splaySet.find("youngly\r");
     auto findEndClock2 = chrono::high_resolution_clock::now();
     chrono::duration<double> time_span4 = chrono::duration_cast<chrono::duration<double>>(findEndClock2 - findStartClock2);
     cout << "duration for finding in splay set 2: " << time_span4.count() << endl;
+
+    //// Find in Splay set 3
+    auto findStartClock3 = chrono::high_resolution_clock::now();
+    splaySet.find("youngness\r");
+    auto findEndClock3 = chrono::high_resolution_clock::now();
+    chrono::duration<double> time_span5 = chrono::duration_cast<chrono::duration<double>>(findEndClock3 - findStartClock3);
+    cout << "duration for finding in splay set 3: " << time_span5.count() << endl;
+
 
     ////Delete in normal set
     DisplayDeleteInNormalSetDuration("incipiency\r", set);
@@ -155,7 +162,7 @@ int main() {
 
     ////Delete in splay set
     auto deleteStartClock = chrono::high_resolution_clock::now();
-    splaySet.erase("incipience\r");
+    splaySet.erase("whale\r");
     auto deleteEndClock = chrono::high_resolution_clock::now();
     chrono::duration<double> delete_time_span = chrono::duration_cast<chrono::duration<double>>(deleteEndClock - deleteStartClock);
     cout << "duration for deleting in splay set: " << delete_time_span.count() << endl;

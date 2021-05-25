@@ -37,7 +37,7 @@ public:
     size_t max_size();
     void clear();
     Compare key_comp() { return compare; }
-//    Key find(Key key);
+    Key find(Key key);
 
 
     int getKey();
@@ -49,7 +49,7 @@ public:
 
     iterator begin() { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.minimum(splayTree.getRoot())); }
     iterator end() { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.maximum(splayTree.getRoot())); }
-    iterator find(Key key) { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.searchTree(key)); }
+//    iterator find(Key key) { return splay_iterator<Key, Key, less<Key>, Alloc>(splayTree.searchTree(key)); }
 
 };
 
